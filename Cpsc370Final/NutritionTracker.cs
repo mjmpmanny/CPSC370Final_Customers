@@ -63,4 +63,35 @@ public class NutritionTracker
         int totalCalories = (caloriesPer100G * grams) / 100;
         _foodLog.AddEntry(foodName, grams, totalCalories);
     }
+    
+    private void DisplayTotalCalories()
+    {
+        int totalCalories = _foodLog.CalculateTotalCalories();
+        Console.WriteLine($"Total Calories Consumed Today: {totalCalories} kcal");
+    }
+
+
+    private void SetCalorieGoal()
+    {
+        if (!int.TryParse(_ui.GetUserInput("Set daily calorie goal: "), out _calorieGoal) || _calorieGoal <= 0)
+        {
+            Console.WriteLine("Invalid calorie goal.");
+            return;
+        }
+
+
+        int totalCalories = _foodLog.CalculateTotalCalories();
+        Console.WriteLine($"Goal: {_calorieGoal} kcal | Consumed: {totalCalories} kcal");
+
+
+        if (totalCalories == 0)
+            Console.WriteLine("No food logged yet.");
+        else if (totalCalories < _calorieGoal)
+            Console.WriteLine("You are below your goal. Keep eating!");
+        else if (totalCalories > _calorieGoal)
+            Console.WriteLine("You have exceeded your goal. Consider adjusting intake.");
+        else
+            Console.WriteLine("Congratulations! You met your goal.");
+    }
+
 }
