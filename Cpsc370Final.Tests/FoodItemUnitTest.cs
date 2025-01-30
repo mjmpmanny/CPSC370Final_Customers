@@ -32,7 +32,7 @@ public class FoodItemUnitTest
     public void CaloriesPer100GProperty_ShouldReturnCorrectValue()
     {
         //arrange
-        var foodItem = new FoodItem("Chicken Breast", 165);
+        var foodItem = new FoodItem("Chicken", 165);
 
         //act and assert
         Assert.Equal(165, foodItem.CaloriesPer100G);
