@@ -1,7 +1,7 @@
 ﻿namespace Cpsc370Final;
 public class FoodDatabase
 {
-    private readonly Dictionary<string, int> _foodItems = new()
+    private readonly Dictionary<string, int> foodItems = new()
     {
         { "chicken", 165 },
         { "rice", 130 },
@@ -44,6 +44,6 @@ public class FoodDatabase
     };
     public int GetCaloriesPer100G(string foodName)
     {
-        return _foodItems.GetValueOrDefault(foodName.ToLower(), -1);
+        return foodItems.GetValueOrDefault(foodName.ToLower(), -1);
     }
 }
