@@ -26,6 +26,8 @@ public class FoodLog
         {
             Console.WriteLine(entry);
         }
+    }
+
     public int CalculateTotalCalories()
     {
         int totalCalories = 0;
@@ -33,7 +35,7 @@ public class FoodLog
         foreach (string entry in _logEntries)
         {
             string[] parts = entry.Split('-');
-            if (parts.Length >= 3))
+            if (parts.Length >= 3)
             {
                 string caloriePart = parts[2].Replace(" kcal", "").Trim();
                 if (int.TryParse(caloriePart, out int calories))
@@ -45,5 +47,5 @@ public class FoodLog
         
         return totalCalories;
     
-      }
+    }
 }
