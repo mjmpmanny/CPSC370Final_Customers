@@ -39,4 +39,28 @@ public class NutritionTracker
             }
         }
     }
+    
+    private void AddFoodItem()
+    {
+        string foodName = _ui.GetUserInput("Enter food name: ");
+        int caloriesPer100G = _foodDatabase.GetCaloriesPer100G(foodName);
+
+
+        if (caloriesPer100G == -1)
+        {
+            Console.WriteLine("Food item not found.");
+            return;
+        }
+
+
+        if (!int.TryParse(_ui.GetUserInput("Enter grams: "), out int grams) || grams <= 0)
+        {
+            Console.WriteLine("Invalid grams input.");
+            return;
+        }
+
+
+        int totalCalories = (caloriesPer100G * grams) / 100;
+        _foodLog.AddEntry(foodName, grams, totalCalories);
+    }
 }
