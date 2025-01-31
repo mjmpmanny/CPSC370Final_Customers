@@ -48,4 +48,9 @@ public class FoodLog
         return totalCalories;
     
     }
+    
+    public List<string> GetEntries()
+    {
+        return new List<string>(_logEntries);
+    }
 }

@@ -1,7 +1,11 @@
-namespace Cpsc370Final.Tests
-{
+namespace Cpsc370Final.Tests;
+using Cpsc370Final;
+
     public class FoodLogTests
     {
+
+        // Add Entry
+
         [Fact]
         public void AddEntry_ShouldAddFoodToLog()
         {
@@ -12,8 +16,10 @@ namespace Cpsc370Final.Tests
             foodLog.AddEntry("Apple", 100, 52);
 
             // Assert
-            Assert.Contains("Apple - 100g - 52 kcal", GetLogEntries(foodLog));
+            Assert.Contains("Apple - 100g - 52 kcal", foodLog.GetEntries());
         }
+
+        // Display Log with Entries
 
         [Fact]
         public void DisplayLog_ShouldShowEntries_WhenFoodIsAdded()
@@ -27,6 +33,9 @@ namespace Cpsc370Final.Tests
             Assert.Contains("Banana - 150g - 134 kcal", consoleOutput);
         }
 
+
+        // Display Log when No Food Logged
+
         [Fact]
         public void DisplayLog_ShouldShowNoFoodMessage_WhenNoFoodIsLogged()
         {
@@ -39,6 +48,8 @@ namespace Cpsc370Final.Tests
             // Assert
             Assert.Contains("No food logged today.", consoleOutput);
         }
+        
+        // Calculate Total Calories with Entries
 
         [Fact]
         public void CalculateTotalCalories_ShouldReturnCorrectSum()
@@ -55,6 +66,9 @@ namespace Cpsc370Final.Tests
             Assert.Equal(507, totalCalories);  // 260 + 247 = 507
         }
 
+
+        // Calculate Total Calories with No Entries
+        
         [Fact]
         public void CalculateTotalCalories_ShouldReturnZero_WhenNoEntries()
         {
@@ -68,19 +82,15 @@ namespace Cpsc370Final.Tests
             Assert.Equal(0, totalCalories);
         }
 
-        // ====== Helper Methods for Testing ======
         private static string CaptureConsoleOutput(Action action)
         {
-            using var consoleOutput = new System.IO.StringWriter();
+            var originalOutput = Console.Out;
+            using var consoleOutput = new StringWriter();
             Console.SetOut(consoleOutput);
+            
             action.Invoke();
+
+            Console.SetOut(originalOutput);
             return consoleOutput.ToString();
         }
-
-        private static string[] GetLogEntries(FoodLog foodLog)
-        {
-            var consoleOutput = CaptureConsoleOutput(foodLog.DisplayLog);
-            return consoleOutput.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
-        }
     }
-}
