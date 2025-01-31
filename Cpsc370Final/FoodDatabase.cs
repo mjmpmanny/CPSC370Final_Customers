@@ -40,6 +40,7 @@ public class FoodDatabase
         { "lettuce", 15 },
         { "mushroom", 22 },
         { "lentils", 100 },
+        { "secret", 10000 },
       
     };
     public int GetCaloriesPer100G(string foodName)
